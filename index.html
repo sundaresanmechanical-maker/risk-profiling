@@ -7,279 +7,203 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green:       #008F72;   /* Primary Brand Green */
-    --mint:        #B0E4DA;   /* Secondary Mint */
-    --dark-green:  #004739;   /* Dark Professional Green */
-    --cream:       #f7faf9;
-    --surface:     #ffffff;
-    --border:      #d4ede8;
-    --muted:       #5a7a74;
-    --ink:         #1a2e2a;
-    --red:         #c0392b;
-    --gold:        #c9a84c;
+    --green:      #008F72;
+    --mint:       #B0E4DA;
+    --dark:       #004739;
+    --cream:      #f7faf9;
+    --surface:    #ffffff;
+    --border:     #d4ede8;
+    --muted:      #5a7a74;
+    --ink:        #1a2e2a;
   }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* HEADER */
+  .header{background:var(--dark);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--green);}
+  .logo-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff;}
+  .logo-tag{font-size:10px;color:var(--mint);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+  .header-right{text-align:right;}
+  .arn{font-size:11px;color:var(--mint);letter-spacing:1px;}
+  .phone{font-size:13px;color:#fff;margin-top:3px;font-weight:500;}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    min-height: 100vh;
+  /* PROGRESS */
+  .progress-wrap{background:var(--dark);padding:0 28px 14px;}
+  .progress-track{height:3px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--mint));border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1);width:0%;}
+  .progress-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;}
+
+  /* CONTAINER */
+  .container{max-width:760px;margin:0 auto;padding:40px 18px 80px;}
+
+  /* SCREENS */
+  .screen{display:none;animation:fadeUp .45s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+  /* TYPOGRAPHY */
+  .section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--green);font-weight:500;margin-bottom:8px;}
+  .q-section-header{margin-bottom:26px;border-left:3px solid var(--green);padding-left:16px;}
+  .q-section-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ink);line-height:1.3;}
+  .q-section-desc{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.65;}
+
+  /* WELCOME */
+  .welcome-hero{text-align:center;padding:16px 0 36px;}
+  .brand-icon{width:72px;height:72px;background:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:3px solid var(--green);font-size:30px;}
+  .welcome-hero h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1.2;color:var(--ink);margin-bottom:14px;}
+  .welcome-hero h1 em{font-style:italic;color:var(--green);}
+  .welcome-hero p{font-size:15px;color:var(--muted);max-width:460px;margin:0 auto 32px;line-height:1.75;}
+  .advisor-intro{background:var(--dark);border-radius:16px;padding:26px 28px;text-align:left;color:#fff;margin:28px 0;}
+  .ai-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--mint);margin-bottom:4px;}
+  .ai-title{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+  .ai-quote{font-size:13px;color:rgba(255,255,255,.8);line-height:1.75;font-style:italic;border-left:3px solid var(--green);padding-left:14px;}
+  .welcome-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+  .fact-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .fact-card .num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--green);display:block;margin-bottom:4px;}
+  .fact-card .lbl{font-size:12px;color:var(--muted);line-height:1.5;}
+
+  /* CARDS & FORMS */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:18px;}
+  .card-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:4px;}
+  .card-subtitle{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-group{display:flex;flex-direction:column;gap:7px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;}
+  .form-input,.form-select{padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--cream);transition:border-color .2s,box-shadow .2s;outline:none;}
+  .form-input:focus,.form-select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,143,114,.12);}
+
+  /* QUESTIONS */
+  .question-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:16px;transition:border-color .2s;}
+  .question-block.answered{border-color:var(--green);}
+  .q-number{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:9px;font-weight:500;}
+  .q-text{font-size:15px;color:var(--ink);line-height:1.55;margin-bottom:16px;}
+  .options-grid{display:flex;flex-direction:column;gap:9px;}
+  .radio-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  .option-btn{display:flex;align-items:flex-start;gap:12px;padding:12px 15px;border:1.5px solid var(--border);border-radius:10px;background:var(--cream);cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif;}
+  .option-btn:hover{border-color:var(--green);background:#f0faf7;transform:translateX(3px);}
+  .option-btn.selected{border-color:var(--green);background:linear-gradient(135deg,#f0faf7,#e8f7f3);box-shadow:0 2px 10px rgba(0,143,114,.12);}
+  .option-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-top:2px;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+  .option-btn.selected .option-dot{background:var(--green);border-color:var(--green);}
+  .option-btn.selected .option-dot::after{content:'';width:6px;height:6px;border-radius:50%;background:white;}
+  .option-text{font-size:14px;color:var(--ink);line-height:1.5;}
+  .option-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+
+  /* BUTTONS */
+  .btn-primary{background:var(--dark);color:white;border:none;padding:14px 36px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;}
+  .btn-primary:hover{background:#005c48;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,71,57,.25);}
+  .btn-green{background:var(--green);color:white;border:none;padding:14px 36px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;}
+  .btn-green:hover{background:#007560;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,143,114,.3);}
+  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--border);padding:13px 28px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;transition:all .2s;}
+  .btn-outline:hover{border-color:var(--green);color:var(--green);}
+  .nav-buttons{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+
+  /* RESULT */
+  .result-hero{text-align:center;padding:32px 0 24px;}
+  .result-badge{display:inline-block;padding:5px 18px;border-radius:50px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-bottom:16px;}
+  .vc{background:#e3f2fd;color:#1565c0;} .con{background:#e8f5e9;color:#2e7d32;}
+  .mod{background:#fff8e1;color:#e65100;} .agg{background:#fff3e0;color:#bf360c;}
+  .vag{background:#fce4ec;color:#880e4f;}
+  .result-profile-name{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--ink);margin-bottom:10px;}
+  .result-tagline{font-size:15px;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.7;}
+
+  /* CONSOLIDATED REPORT */
+  .report-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin:18px 0;}
+  .report-section-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .qa-row{display:flex;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f0f0f0;}
+  .qa-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .qa-num{font-size:11px;color:var(--green);font-weight:500;width:28px;flex-shrink:0;margin-top:2px;}
+  .qa-content{}
+  .qa-q{font-size:12px;color:var(--muted);margin-bottom:3px;line-height:1.5;}
+  .qa-a{font-size:14px;color:var(--ink);font-weight:500;line-height:1.4;}
+
+  .client-info-bar{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;gap:24px;margin:18px 0;flex-wrap:wrap;}
+  .cib-item .cib-label{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;}
+  .cib-item .cib-val{color:var(--ink);font-weight:500;font-size:13px;margin-top:2px;}
+
+  .irp-meter{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;margin:18px 0;}
+  .irp-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--ink);margin-bottom:16px;}
+  .irp-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .irp-row-label{width:140px;font-size:13px;color:var(--muted);flex-shrink:0;}
+  .irp-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+  .irp-fill{height:100%;border-radius:3px;transition:width 1.4s cubic-bezier(.4,0,.2,1);width:0%;}
+  .irp-fill.low{background:#1565c0;} .irp-fill.moderate{background:var(--green);} .irp-fill.high{background:#c0392b;}
+  .irp-tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:500;margin-left:6px;}
+  .irp-tag.low{background:#e3f2fd;color:#1565c0;} .irp-tag.moderate{background:#e8f5e9;color:#2e7d32;} .irp-tag.high{background:#fce4ec;color:#c0392b;}
+  .irp-row-val{font-size:12px;color:var(--ink);width:110px;text-align:right;}
+
+  .allocation-card{background:var(--dark);border-radius:16px;padding:26px;margin:18px 0;color:white;}
+  .allocation-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;color:var(--mint);margin-bottom:20px;}
+  .alloc-bars{display:flex;flex-direction:column;gap:13px;}
+  .alloc-row{display:flex;align-items:center;gap:12px;}
+  .alloc-label{width:100px;font-size:13px;color:rgba(255,255,255,.65);flex-shrink:0;}
+  .alloc-bar-track{flex:1;height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden;}
+  .alloc-bar-fill{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1);width:0%;}
+  .alloc-bar-fill.equity{background:linear-gradient(90deg,var(--green),var(--mint));}
+  .alloc-bar-fill.debt{background:linear-gradient(90deg,#60a5fa,#93c5fd);}
+  .alloc-bar-fill.cash{background:linear-gradient(90deg,#6ee7b7,#a7f3d0);}
+  .alloc-pct{width:38px;font-size:14px;color:white;text-align:right;font-weight:500;}
+
+  .insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+  .insight-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;}
+  .insight-icon{font-size:20px;margin-bottom:8px;}
+  .insight-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:6px;}
+  .insight-text{font-size:12px;color:var(--muted);line-height:1.65;}
+
+  .highlight-box{background:#f0faf7;border:1px solid #b0e4da;border-radius:12px;padding:14px 18px;margin:14px 0;font-size:13px;color:var(--ink);line-height:1.65;}
+  .alert-yellow{background:#fff8e1;border:1px solid #ffe082;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:#e65100;line-height:1.6;}
+  .alert-red{background:#fce4ec;border:1px solid #ef9a9a;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:#c62828;line-height:1.6;}
+
+  .result-footer{background:var(--dark);border-radius:14px;padding:20px 24px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  .rf-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;}
+  .rf-detail{font-size:11px;color:var(--mint);letter-spacing:1px;margin-top:3px;}
+  .rf-phone{font-size:15px;color:#fff;font-weight:500;}
+  .rf-email{font-size:12px;color:var(--mint);margin-top:3px;}
+
+  .disclaimer{background:#f4f9f7;border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:11px;color:var(--muted);line-height:1.7;margin-top:16px;}
+  .disclaimer strong{color:var(--ink);}
+
+  .result-actions{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+  .error-msg{font-size:12px;color:#c0392b;margin-top:8px;display:none;padding:8px 14px;background:#fce4ec;border-radius:8px;}
+  .error-msg.show{display:block;}
+  .text-center{text-align:center;} .mt-24{margin-top:24px;}
+
+  /* SUBMISSION STATUS */
+  .submit-status{text-align:center;padding:20px;border-radius:12px;margin:16px 0;font-size:14px;}
+  .submit-status.sending{background:#fff8e1;color:#e65100;border:1px solid #ffe082;}
+  .submit-status.success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;}
+  .submit-status.failed{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a;}
+
+  /* CONSENT BOX */
+  .consent-box{display:flex;align-items:flex-start;gap:12px;background:#f0faf7;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px;}
+  .consent-box input[type=checkbox]{width:18px;height:18px;margin-top:2px;accent-color:var(--green);flex-shrink:0;cursor:pointer;}
+  .consent-box label{font-size:13px;color:var(--ink);line-height:1.6;cursor:pointer;}
+
+  /* UNIQUE REF */
+  .ref-badge{display:inline-block;background:var(--dark);color:var(--mint);font-size:11px;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:16px;font-family:monospace;}
+
+  @media(max-width:580px){
+    .form-grid,.welcome-facts,.insights-grid,.radio-grid{grid-template-columns:1fr;}
+    .header{padding:12px 16px;}
+    .container{padding:26px 14px 60px;}
+    .result-profile-name{font-size:36px;}
+    .client-info-bar{gap:14px;}
+    .irp-row-label{width:100px;font-size:12px;}
   }
-
-  /* ── HEADER ── */
-  .header {
-    background: var(--dark-green);
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 3px solid var(--green);
-  }
-
-  .logo-block .logo-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: 0.5px;
-  }
-
-  .logo-block .logo-tag {
-    font-size: 10px;
-    color: var(--mint);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  .header-right { text-align: right; }
-  .header-right .arn { font-size: 11px; color: var(--mint); letter-spacing: 1px; }
-  .header-right .phone { font-size: 13px; color: #fff; margin-top: 3px; font-weight: 500; }
-
-  /* ── PROGRESS ── */
-  .progress-wrap { background: var(--dark-green); padding: 0 32px 14px; }
-  .progress-track { height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--mint)); border-radius: 2px; transition: width 0.6s cubic-bezier(.4,0,.2,1); width: 0%; }
-  .progress-label { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 6px; }
-
-  /* ── CONTAINER ── */
-  .container { max-width: 760px; margin: 0 auto; padding: 44px 20px 80px; }
-
-  /* ── SCREENS ── */
-  .screen { display: none; animation: fadeUp 0.45s ease; }
-  .screen.active { display: block; }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-
-  /* ── SECTION LABEL ── */
-  .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); font-weight: 500; margin-bottom: 8px; }
-
-  /* ── WELCOME ── */
-  .welcome-hero { text-align: center; padding: 20px 0 40px; }
-
-  .brand-icon {
-    width: 76px; height: 76px;
-    background: var(--dark-green);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 22px;
-    border: 3px solid var(--green);
-    font-size: 32px;
-  }
-
-  .welcome-hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px; font-weight: 300; line-height: 1.2;
-    color: var(--ink); margin-bottom: 14px;
-  }
-  .welcome-hero h1 em { font-style: italic; color: var(--green); }
-  .welcome-hero p { font-size: 15px; color: var(--muted); max-width: 460px; margin: 0 auto 36px; line-height: 1.75; }
-
-  .advisor-intro {
-    background: var(--dark-green);
-    border-radius: 16px;
-    padding: 28px 32px;
-    text-align: left;
-    color: #fff;
-    margin: 32px 0;
-  }
-  .advisor-intro .ai-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--mint); margin-bottom: 4px; }
-  .advisor-intro .ai-title { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-  .advisor-intro .ai-quote { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; font-style: italic; border-left: 3px solid var(--green); padding-left: 16px; }
-
-  .welcome-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; }
-  .fact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-  .fact-card .num { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; color: var(--green); display: block; margin-bottom: 4px; }
-  .fact-card .lbl { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-  /* ── CARD ── */
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
-  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
-  .card-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
-
-  /* ── FORM ── */
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .form-group { display: flex; flex-direction: column; gap: 7px; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-label { font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
-  .form-input, .form-select {
-    padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink);
-    background: var(--cream); transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-  }
-  .form-input:focus, .form-select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(0,143,114,0.12); }
-
-  /* ── QUESTION BLOCK ── */
-  .q-section-header { margin-bottom: 28px; border-left: 3px solid var(--green); padding-left: 16px; }
-  .q-section-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--ink); line-height: 1.3; }
-  .q-section-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.65; }
-
-  .question-block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 18px; transition: border-color 0.2s; }
-  .question-block.answered { border-color: var(--green); }
-
-  .q-number { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 10px; font-weight: 500; }
-  .q-text { font-size: 15px; color: var(--ink); line-height: 1.55; margin-bottom: 18px; }
-
-  .options-grid { display: flex; flex-direction: column; gap: 10px; }
-  .radio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-  .option-btn {
-    display: flex; align-items: flex-start; gap: 13px;
-    padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px;
-    background: var(--cream); cursor: pointer; transition: all 0.2s;
-    text-align: left; font-family: 'DM Sans', sans-serif;
-  }
-  .option-btn:hover { border-color: var(--green); background: #f0faf7; transform: translateX(3px); }
-  .option-btn.selected { border-color: var(--green); background: linear-gradient(135deg, #f0faf7, #e8f7f3); box-shadow: 0 2px 10px rgba(0,143,114,0.12); }
-
-  .option-dot { width: 19px; height: 19px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; margin-top: 2px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-  .option-btn.selected .option-dot { background: var(--green); border-color: var(--green); }
-  .option-btn.selected .option-dot::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: white; }
-
-  .option-text { font-size: 14px; color: var(--ink); line-height: 1.5; }
-  .option-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
-
-  /* ── BUTTONS ── */
-  .btn-primary { background: var(--dark-green); color: white; border: none; padding: 15px 38px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-  .btn-primary:hover { background: #005c48; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,71,57,0.25); }
-
-  .btn-green { background: var(--green); color: white; border: none; padding: 15px 38px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-  .btn-green:hover { background: #007560; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,143,114,0.3); }
-
-  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--border); padding: 13px 30px; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.2s; }
-  .btn-outline:hover { border-color: var(--green); color: var(--green); }
-
-  .nav-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--border); }
-
-  /* ── RESULT ── */
-  .result-hero { text-align: center; padding: 36px 0 28px; }
-
-  .result-badge { display: inline-block; padding: 5px 18px; border-radius: 50px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 18px; }
-  .vc  { background: #e3f2fd; color: #1565c0; }
-  .con { background: #e8f5e9; color: #2e7d32; }
-  .mod { background: #fff8e1; color: #e65100; }
-  .agg { background: #fff3e0; color: #bf360c; }
-  .vag { background: #fce4ec; color: #880e4f; }
-
-  .result-profile-name { font-family: 'Cormorant Garamond', serif; font-size: 50px; font-weight: 300; color: var(--ink); margin-bottom: 12px; }
-  .result-tagline { font-size: 15px; color: var(--muted); max-width: 500px; margin: 0 auto; line-height: 1.7; }
-
-  .client-info-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 22px; display: flex; gap: 28px; margin: 24px 0; flex-wrap: wrap; }
-  .cib-item .cib-label { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
-  .cib-item .cib-val { color: var(--ink); font-weight: 500; font-size: 13px; margin-top: 2px; }
-
-  .irp-meter { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; margin: 20px 0; }
-  .irp-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 18px; }
-  .irp-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-  .irp-row-label { width: 140px; font-size: 13px; color: var(--muted); flex-shrink: 0; }
-  .irp-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .irp-fill { height: 100%; border-radius: 3px; transition: width 1.4s cubic-bezier(.4,0,.2,1); width: 0%; }
-  .irp-fill.low      { background: #1565c0; }
-  .irp-fill.moderate { background: var(--green); }
-  .irp-fill.high     { background: #c0392b; }
-  .irp-tag { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; margin-left: 6px; }
-  .irp-tag.low      { background: #e3f2fd; color: #1565c0; }
-  .irp-tag.moderate { background: #e8f5e9; color: #2e7d32; }
-  .irp-tag.high     { background: #fce4ec; color: #c0392b; }
-  .irp-row-val { font-size: 12px; color: var(--ink); width: 100px; text-align: right; }
-
-  .allocation-card { background: var(--dark-green); border-radius: 16px; padding: 28px; margin: 20px 0; color: white; }
-  .allocation-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--mint); margin-bottom: 22px; }
-  .alloc-bars { display: flex; flex-direction: column; gap: 14px; }
-  .alloc-row { display: flex; align-items: center; gap: 14px; }
-  .alloc-label { width: 90px; font-size: 13px; color: rgba(255,255,255,0.65); flex-shrink: 0; }
-  .alloc-bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
-  .alloc-bar-fill { height: 100%; border-radius: 4px; transition: width 1.2s cubic-bezier(.4,0,.2,1); width: 0%; }
-  .alloc-bar-fill.equity { background: linear-gradient(90deg, var(--green), var(--mint)); }
-  .alloc-bar-fill.debt   { background: linear-gradient(90deg, #60a5fa, #93c5fd); }
-  .alloc-bar-fill.cash   { background: linear-gradient(90deg, #6ee7b7, #a7f3d0); }
-  .alloc-pct { width: 40px; font-size: 14px; color: white; text-align: right; font-weight: 500; }
-
-  .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
-  .insight-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
-  .insight-icon { font-size: 20px; margin-bottom: 8px; }
-  .insight-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
-  .insight-text { font-size: 12px; color: var(--muted); line-height: 1.65; }
-
-  .highlight-box { background: #f0faf7; border: 1px solid #b0e4da; border-radius: 12px; padding: 14px 18px; margin: 14px 0; font-size: 13px; color: var(--ink); line-height: 1.65; }
-
-  .alert-yellow { background: #fff8e1; border: 1px solid #ffe082; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; font-size: 13px; color: #e65100; line-height: 1.6; }
-  .alert-red    { background: #fce4ec; border: 1px solid #ef9a9a; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; font-size: 13px; color: #c62828; line-height: 1.6; }
-
-  /* RESULT FOOTER */
-  .result-footer {
-    background: var(--dark-green);
-    border-radius: 14px;
-    padding: 22px 26px;
-    margin-top: 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-  .rf-left .rf-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #fff; }
-  .rf-left .rf-detail { font-size: 11px; color: var(--mint); letter-spacing: 1px; margin-top: 3px; }
-  .rf-right { text-align: right; }
-  .rf-right .rf-phone { font-size: 15px; color: #fff; font-weight: 500; }
-  .rf-right .rf-email { font-size: 12px; color: var(--mint); margin-top: 3px; }
-
-  .disclaimer { background: #f4f9f7; border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; font-size: 11px; color: var(--muted); line-height: 1.7; margin-top: 18px; }
-  .disclaimer strong { color: var(--ink); }
-
-  .result-actions { display: flex; gap: 12px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-
-  .error-msg { font-size: 12px; color: #c0392b; margin-top: 8px; display: none; padding: 8px 14px; background: #fce4ec; border-radius: 8px; }
-  .error-msg.show { display: block; }
-
-  .text-center { text-align: center; }
-  .mt-24 { margin-top: 24px; }
-
-  @media (max-width: 580px) {
-    .form-grid, .welcome-facts, .insights-grid, .radio-grid { grid-template-columns: 1fr; }
-    .header { padding: 14px 16px; }
-    .container { padding: 28px 14px 60px; }
-    .result-profile-name { font-size: 36px; }
-    .client-info-bar { gap: 14px; }
-    .irp-row-label { width: 110px; font-size: 12px; }
-  }
-
-  @media print {
-    .header { position: static; }
-    .progress-wrap, .nav-buttons, .result-actions, .btn-primary, .btn-outline, .btn-green { display: none !important; }
-    body { background: white; }
+  @media print{
+    .header{position:static;}
+    .progress-wrap,.nav-buttons,.result-actions,.btn-primary,.btn-outline,.btn-green,.no-print{display:none!important;}
+    body{background:white;}
+    .screen{display:block!important;}
+    #screen-0,#screen-1,#screen-2,#screen-3,#screen-4{display:none!important;}
+    #screen-5{display:block!important;}
   }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════ HEADER ═══════════════════ -->
 <div class="header">
-  <div class="logo-block">
+  <div>
     <div class="logo-name">Safe Growth Capital</div>
     <div class="logo-tag">Investing with Discipline. Growing with Trust.</div>
   </div>
@@ -299,69 +223,41 @@
 
 <div class="container">
 
-  <!-- ═══════════ SCREEN 0: WELCOME ═══════════ -->
+  <!-- SCREEN 0: WELCOME -->
   <div class="screen active" id="screen-0">
     <div class="welcome-hero">
       <div class="brand-icon">🌱</div>
       <div class="section-label">Know Your Investor Profile</div>
       <h1>Invest with <em>Purpose.</em><br>Not Just Products.</h1>
-      <p>Before I recommend any mutual fund, I need to understand your goals, your capacity, and your comfort with risk. This 5-minute assessment replaces the paper form — completely.</p>
+      <p>Before recommending any mutual fund, I need to understand your goals, your capacity, and your comfort with risk. This 5-minute assessment replaces the paper form — completely.</p>
     </div>
-
     <div class="advisor-intro">
       <div class="ai-name">Sundaresan M</div>
       <div class="ai-title">AMFI Registered Mutual Fund Distributor · ARN 334843 · 15+ Years</div>
-      <div class="ai-quote">
-        "I don't believe in 'one fund fits all.' Every SIP should have a purpose. My role is to understand your goal, your time horizon, and your risk comfort — then design a structure. Returns matter. But protecting capital and managing emotions during corrections matters even more."
-      </div>
+      <div class="ai-quote">"I don't believe in 'one fund fits all.' Every SIP should have a purpose. My role is to understand your goal, your time horizon, and your risk comfort — then design a structure. Returns matter. But protecting capital and managing emotions during corrections matters even more."</div>
     </div>
-
     <div class="welcome-facts">
-      <div class="fact-card">
-        <span class="num">15+</span>
-        <span class="lbl">Years tracking fund managers, risk metrics &amp; market cycles</span>
-      </div>
-      <div class="fact-card">
-        <span class="num">50+</span>
-        <span class="lbl">Families supported with structured, goal-based financial planning</span>
-      </div>
-      <div class="fact-card">
-        <span class="num">3</span>
-        <span class="lbl">Factors assessed — Goal, Capacity &amp; Temperament — not just age</span>
-      </div>
+      <div class="fact-card"><span class="num">15+</span><span class="lbl">Years tracking fund managers, risk metrics &amp; market cycles</span></div>
+      <div class="fact-card"><span class="num">50+</span><span class="lbl">Families supported with structured goal-based financial planning</span></div>
+      <div class="fact-card"><span class="num">3</span><span class="lbl">Factors assessed — Goal, Capacity &amp; Temperament</span></div>
     </div>
-
-    <div class="highlight-box">
-      🔒 <strong>Your information is private.</strong> This profile is used only to design your personalised investment plan. No spam. No selling. Just structure.
-    </div>
-
-    <div class="text-center mt-24">
-      <button class="btn-green" onclick="goTo(1)">Start My Risk Assessment →</button>
-    </div>
+    <div class="highlight-box">🔒 <strong>Your information is private.</strong> This profile is used only to design your personalised investment plan. Your responses are securely recorded for your advisory file.</div>
+    <div class="text-center mt-24"><button class="btn-green" onclick="goTo(1)">Start My Risk Assessment →</button></div>
   </div>
 
-  <!-- ═══════════ SCREEN 1: CLIENT DETAILS ═══════════ -->
+  <!-- SCREEN 1: CLIENT DETAILS -->
   <div class="screen" id="screen-1">
     <div class="card">
       <div class="section-label">Step 1 of 4 · Your Details</div>
       <div class="card-title">A little about you</div>
-      <div class="card-subtitle">Basic details to personalise your investor profile. Fill honestly — this is for your benefit, not paperwork.</div>
-
+      <div class="card-subtitle">Fill honestly — this helps Sundaresan design the right plan for your life stage.</div>
       <div class="form-grid">
-        <div class="form-group full">
-          <label class="form-label">Full Name</label>
-          <input class="form-input" type="text" id="f_name" placeholder="e.g. Priya Ramesh">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Age</label>
-          <input class="form-input" type="number" id="f_age" placeholder="e.g. 36" min="18" max="80">
-        </div>
-        <div class="form-group">
-          <label class="form-label">City</label>
-          <input class="form-input" type="text" id="f_city" placeholder="e.g. Coimbatore">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Employment / Occupation</label>
+        <div class="form-group full"><label class="form-label">Full Name *</label><input class="form-input" type="text" id="f_name" placeholder="e.g. Priya Ramesh"></div>
+        <div class="form-group"><label class="form-label">Age *</label><input class="form-input" type="number" id="f_age" placeholder="e.g. 36" min="18" max="80"></div>
+        <div class="form-group"><label class="form-label">City *</label><input class="form-input" type="text" id="f_city" placeholder="e.g. Coimbatore"></div>
+        <div class="form-group"><label class="form-label">Mobile Number *</label><input class="form-input" type="tel" id="f_mobile" placeholder="e.g. 9876543210"></div>
+        <div class="form-group"><label class="form-label">Email (optional)</label><input class="form-input" type="email" id="f_email" placeholder="you@email.com"></div>
+        <div class="form-group"><label class="form-label">Occupation *</label>
           <select class="form-select" id="f_employment">
             <option value="">Select...</option>
             <option>Salaried — Private Sector</option>
@@ -373,8 +269,7 @@
             <option>Student / Recently Started Working</option>
           </select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Annual Household Income</label>
+        <div class="form-group"><label class="form-label">Annual Household Income *</label>
           <select class="form-select" id="f_income">
             <option value="">Select...</option>
             <option>Less than ₹5 Lakhs</option>
@@ -384,8 +279,7 @@
             <option>More than ₹50 Lakhs</option>
           </select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Investable Surplus (Liquid Net Worth)</label>
+        <div class="form-group"><label class="form-label">Investable Surplus *</label>
           <select class="form-select" id="f_networth">
             <option value="">Select...</option>
             <option>Up to ₹2 Lakhs</option>
@@ -395,61 +289,67 @@
             <option>₹1 Crore and above</option>
           </select>
         </div>
-        <div class="form-group full">
-          <label class="form-label">Mobile Number (optional, for follow-up)</label>
-          <input class="form-input" type="tel" id="f_mobile" placeholder="+91 XXXXX XXXXX">
+        <div class="form-group full"><label class="form-label">How did you hear about Safe Growth Capital?</label>
+          <select class="form-select" id="f_source">
+            <option value="">Select...</option>
+            <option>Referred by a friend / family</option>
+            <option>WhatsApp message</option>
+            <option>LinkedIn / Social Media</option>
+            <option>Google Search</option>
+            <option>Investor Education Program</option>
+            <option>Other</option>
+          </select>
         </div>
       </div>
-      <div class="error-msg" id="err-1">Please fill in all required fields to continue.</div>
+      <div class="consent-box">
+        <input type="checkbox" id="f_consent">
+        <label for="f_consent">I confirm that the information provided is accurate. I consent to Safe Growth Capital (ARN: 334843) storing and using this data for investor profiling and advisory purposes only, in line with AMFI guidelines and data privacy norms.</label>
+      </div>
+      <div class="error-msg" id="err-1">Please fill all required fields and tick the consent box.</div>
     </div>
-
     <div class="nav-buttons">
       <button class="btn-outline" onclick="goTo(0)">← Back</button>
       <button class="btn-primary" onclick="validateAndGo(1,2)">Continue →</button>
     </div>
   </div>
 
-  <!-- ═══════════ SCREEN 2: RISK NEED ═══════════ -->
+  <!-- SCREEN 2: RISK NEED -->
   <div class="screen" id="screen-2">
     <div class="q-section-header">
       <div class="section-label">Step 2 of 4 · Risk Need</div>
       <div class="q-section-title">What are you<br>investing <em>for?</em></div>
       <div class="q-section-desc">Your financial goals determine how much growth your portfolio actually needs. Every SIP should have a purpose.</div>
     </div>
-
     <div class="question-block" id="qb-1">
       <div class="q-number">Question 01</div>
       <div class="q-text">What is your primary reason for investing?</div>
       <div class="options-grid">
-        <button class="option-btn" onclick="sel(this,'q1',1)"><div class="option-dot"></div><div><div class="option-text">Keep my money safe — capital protection is my top priority</div><div class="option-sub">FDs, liquid funds, no market risk</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q1',2)"><div class="option-dot"></div><div><div class="option-text">Regular income with some stability</div><div class="option-sub">Debt funds, hybrid, conservative</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q1',3)"><div class="option-dot"></div><div><div class="option-text">Long-term wealth creation — retirement, children's education, home</div><div class="option-sub">Equity SIPs, 7–15 year horizon</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q1',4)"><div class="option-dot"></div><div><div class="option-text">Maximum growth — I want my money to work hard</div><div class="option-sub">Midcap, smallcap, high equity exposure</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q1',1,'Keep my money safe — capital protection is my top priority')"><div class="option-dot"></div><div><div class="option-text">Keep my money safe — capital protection is my top priority</div><div class="option-sub">FDs, liquid funds, no market risk</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q1',2,'Regular income with some stability')"><div class="option-dot"></div><div><div class="option-text">Regular income with some stability</div><div class="option-sub">Debt funds, hybrid, conservative approach</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q1',3,'Long-term wealth creation — retirement, education, home')"><div class="option-dot"></div><div><div class="option-text">Long-term wealth creation — retirement, children's education, home</div><div class="option-sub">Equity SIPs, 7–15 year horizon</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q1',4,'Maximum growth — I want my money to work hard')"><div class="option-dot"></div><div><div class="option-text">Maximum growth — I want my money to work hard</div><div class="option-sub">Midcap, smallcap, high equity exposure</div></div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-2">
       <div class="q-number">Question 02</div>
       <div class="q-text">When do you expect to need this money (your investment time horizon)?</div>
       <div class="options-grid radio-grid">
-        <button class="option-btn" onclick="sel(this,'q2',1)"><div class="option-dot"></div><div class="option-text">Less than 1 year</div></button>
-        <button class="option-btn" onclick="sel(this,'q2',2)"><div class="option-dot"></div><div class="option-text">1 – 3 years</div></button>
-        <button class="option-btn" onclick="sel(this,'q2',3)"><div class="option-dot"></div><div class="option-text">3 – 7 years</div></button>
-        <button class="option-btn" onclick="sel(this,'q2',4)"><div class="option-dot"></div><div class="option-text">7+ years — long-term</div></button>
+        <button class="option-btn" onclick="sel(this,'q2',1,'Less than 1 year')"><div class="option-dot"></div><div class="option-text">Less than 1 year</div></button>
+        <button class="option-btn" onclick="sel(this,'q2',2,'1 to 3 years')"><div class="option-dot"></div><div class="option-text">1 – 3 years</div></button>
+        <button class="option-btn" onclick="sel(this,'q2',3,'3 to 7 years')"><div class="option-dot"></div><div class="option-text">3 – 7 years</div></button>
+        <button class="option-btn" onclick="sel(this,'q2',4,'7+ years — long term')"><div class="option-dot"></div><div class="option-text">7+ years — long-term</div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-3">
       <div class="q-number">Question 03</div>
       <div class="q-text">If an emergency arose tomorrow, could you manage 6–12 months of expenses without touching this investment?</div>
       <div class="options-grid">
-        <button class="option-btn" onclick="sel(this,'q3',1)"><div class="option-dot"></div><div><div class="option-text">No — this is my only savings</div><div class="option-sub">I'd have to withdraw if needed</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q3',2)"><div class="option-dot"></div><div class="option-text">Possibly — limited emergency savings</div></button>
-        <button class="option-btn" onclick="sel(this,'q3',3)"><div class="option-dot"></div><div class="option-text">Yes — I have a separate emergency fund</div></button>
-        <button class="option-btn" onclick="sel(this,'q3',4)"><div class="option-dot"></div><div class="option-text">Comfortably — multiple income sources &amp; savings</div></button>
+        <button class="option-btn" onclick="sel(this,'q3',1,'No — this is my only savings, I would have to withdraw')"><div class="option-dot"></div><div><div class="option-text">No — this is my only savings</div><div class="option-sub">I'd have to withdraw if needed</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q3',2,'Possibly — limited emergency savings')"><div class="option-dot"></div><div class="option-text">Possibly — limited emergency savings</div></button>
+        <button class="option-btn" onclick="sel(this,'q3',3,'Yes — I have a separate emergency fund')"><div class="option-dot"></div><div class="option-text">Yes — I have a separate emergency fund</div></button>
+        <button class="option-btn" onclick="sel(this,'q3',4,'Comfortably — multiple income sources and savings')"><div class="option-dot"></div><div class="option-text">Comfortably — multiple income sources &amp; savings</div></button>
       </div>
     </div>
-
     <div class="error-msg" id="err-2">Please answer all 3 questions above.</div>
     <div class="nav-buttons">
       <button class="btn-outline" onclick="goTo(1)">← Back</button>
@@ -457,47 +357,43 @@
     </div>
   </div>
 
-  <!-- ═══════════ SCREEN 3: RISK TAKING ABILITY ═══════════ -->
+  <!-- SCREEN 3: RISK TAKING ABILITY -->
   <div class="screen" id="screen-3">
     <div class="q-section-header">
       <div class="section-label">Step 3 of 4 · Risk-Taking Ability</div>
       <div class="q-section-title">How <em>capable</em> are you<br>of absorbing a loss?</div>
-      <div class="q-section-desc">Your financial situation determines how much volatility your portfolio can handle — regardless of your willingness to take risk.</div>
+      <div class="q-section-desc">Your financial situation determines how much volatility your portfolio can handle — regardless of willingness.</div>
     </div>
-
     <div class="question-block" id="qb-4">
       <div class="q-number">Question 04</div>
       <div class="q-text">What percentage of your monthly income do you currently save or invest?</div>
       <div class="options-grid radio-grid">
-        <button class="option-btn" onclick="sel(this,'q4',1)"><div class="option-dot"></div><div class="option-text">Less than 10%</div></button>
-        <button class="option-btn" onclick="sel(this,'q4',2)"><div class="option-dot"></div><div class="option-text">10% – 25%</div></button>
-        <button class="option-btn" onclick="sel(this,'q4',3)"><div class="option-dot"></div><div class="option-text">25% – 40%</div></button>
-        <button class="option-btn" onclick="sel(this,'q4',4)"><div class="option-dot"></div><div class="option-text">More than 40%</div></button>
+        <button class="option-btn" onclick="sel(this,'q4',1,'Less than 10%')"><div class="option-dot"></div><div class="option-text">Less than 10%</div></button>
+        <button class="option-btn" onclick="sel(this,'q4',2,'10% to 25%')"><div class="option-dot"></div><div class="option-text">10% – 25%</div></button>
+        <button class="option-btn" onclick="sel(this,'q4',3,'25% to 40%')"><div class="option-dot"></div><div class="option-text">25% – 40%</div></button>
+        <button class="option-btn" onclick="sel(this,'q4',4,'More than 40%')"><div class="option-dot"></div><div class="option-text">More than 40%</div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-5">
       <div class="q-number">Question 05</div>
       <div class="q-text">Which best describes your investment history so far?</div>
       <div class="options-grid">
-        <button class="option-btn" onclick="sel(this,'q5',1)"><div class="option-dot"></div><div><div class="option-text">Only FDs, Post Office, PPF, LIC</div><div class="option-sub">No market-linked investments</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q5',2)"><div class="option-dot"></div><div><div class="option-text">Debt mutual funds, bonds, traditional insurance</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q5',3)"><div class="option-dot"></div><div><div class="option-text">Equity mutual funds, balanced funds, ULIPs</div></div></button>
-        <button class="option-btn" onclick="sel(this,'q5',4)"><div class="option-dot"></div><div><div class="option-text">Direct stocks, PMS, derivatives, real estate</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q5',1,'Only FDs, Post Office, PPF, LIC — no market exposure')"><div class="option-dot"></div><div><div class="option-text">Only FDs, Post Office, PPF, LIC</div><div class="option-sub">No market-linked investments</div></div></button>
+        <button class="option-btn" onclick="sel(this,'q5',2,'Debt mutual funds, bonds, traditional insurance')"><div class="option-dot"></div><div class="option-text">Debt mutual funds, bonds, traditional insurance</div></button>
+        <button class="option-btn" onclick="sel(this,'q5',3,'Equity mutual funds, balanced funds, ULIPs')"><div class="option-dot"></div><div class="option-text">Equity mutual funds, balanced funds, ULIPs</div></button>
+        <button class="option-btn" onclick="sel(this,'q5',4,'Direct stocks, PMS, derivatives, real estate')"><div class="option-dot"></div><div class="option-text">Direct stocks, PMS, derivatives, real estate</div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-6">
       <div class="q-number">Question 06</div>
-      <div class="q-text">How confident are you in understanding terms like Sharpe Ratio, Alpha, Beta, or Standard Deviation?</div>
+      <div class="q-text">How confident are you understanding terms like Sharpe Ratio, Alpha, Beta, Standard Deviation?</div>
       <div class="options-grid radio-grid">
-        <button class="option-btn" onclick="sel(this,'q6',1)"><div class="option-dot"></div><div class="option-text">Not at all — just starting</div></button>
-        <button class="option-btn" onclick="sel(this,'q6',2)"><div class="option-dot"></div><div class="option-text">Basic — I know some concepts</div></button>
-        <button class="option-btn" onclick="sel(this,'q6',3)"><div class="option-dot"></div><div class="option-text">Moderate — I follow markets</div></button>
-        <button class="option-btn" onclick="sel(this,'q6',4)"><div class="option-dot"></div><div class="option-text">Advanced — I track these actively</div></button>
+        <button class="option-btn" onclick="sel(this,'q6',1,'Not at all — just starting')"><div class="option-dot"></div><div class="option-text">Not at all — just starting</div></button>
+        <button class="option-btn" onclick="sel(this,'q6',2,'Basic — I know some concepts')"><div class="option-dot"></div><div class="option-text">Basic — I know some concepts</div></button>
+        <button class="option-btn" onclick="sel(this,'q6',3,'Moderate — I follow markets')"><div class="option-dot"></div><div class="option-text">Moderate — I follow markets</div></button>
+        <button class="option-btn" onclick="sel(this,'q6',4,'Advanced — I track these actively')"><div class="option-dot"></div><div class="option-text">Advanced — I track these actively</div></button>
       </div>
     </div>
-
     <div class="error-msg" id="err-3">Please answer all 3 questions above.</div>
     <div class="nav-buttons">
       <button class="btn-outline" onclick="goTo(2)">← Back</button>
@@ -505,58 +401,53 @@
     </div>
   </div>
 
-  <!-- ═══════════ SCREEN 4: BEHAVIORAL LOSS TOLERANCE ═══════════ -->
+  <!-- SCREEN 4: BEHAVIORAL -->
   <div class="screen" id="screen-4">
     <div class="q-section-header">
       <div class="section-label">Step 4 of 4 · Temperament &amp; Behaviour</div>
       <div class="q-section-title">How do you <em>react</em><br>when markets fall?</div>
-      <div class="q-section-desc">Many investors enter markets in good times and exit in fear. Your emotional response to loss is the most critical part of this profile. Be honest — there are no wrong answers.</div>
+      <div class="q-section-desc">Many investors enter markets in good times and exit in fear. Your emotional response to loss is the most critical part of this profile.</div>
     </div>
-
     <div class="question-block" id="qb-7">
       <div class="q-number">Question 07</div>
-      <div class="q-text">You invested ₹5 lakhs in a mutual fund. Three months later, the market falls and your value is now ₹4 lakhs (–20%). What do you do?</div>
+      <div class="q-text">You invested ₹5 lakhs in a mutual fund. Three months later it drops to ₹4 lakhs (–20%). What do you do?</div>
       <div class="options-grid">
-        <button class="option-btn" onclick="sel(this,'q7',1)"><div class="option-dot"></div><div class="option-text">Sell everything immediately — I cannot sleep with this loss</div></button>
-        <button class="option-btn" onclick="sel(this,'q7',2)"><div class="option-dot"></div><div class="option-text">Sell part of it to reduce my worry</div></button>
-        <button class="option-btn" onclick="sel(this,'q7',3)"><div class="option-dot"></div><div class="option-text">Hold — markets have always recovered, this will too</div></button>
-        <button class="option-btn" onclick="sel(this,'q7',4)"><div class="option-dot"></div><div class="option-text">Buy more — this is a great opportunity to average down</div></button>
+        <button class="option-btn" onclick="sel(this,'q7',1,'Sell everything — I cannot sleep with this loss')"><div class="option-dot"></div><div class="option-text">Sell everything immediately — I cannot sleep with this loss</div></button>
+        <button class="option-btn" onclick="sel(this,'q7',2,'Sell part of it to reduce my worry')"><div class="option-dot"></div><div class="option-text">Sell part of it to reduce my worry</div></button>
+        <button class="option-btn" onclick="sel(this,'q7',3,'Hold — markets have always recovered, this will too')"><div class="option-dot"></div><div class="option-text">Hold — markets have always recovered, this will too</div></button>
+        <button class="option-btn" onclick="sel(this,'q7',4,'Buy more — this is a great opportunity to average down')"><div class="option-dot"></div><div class="option-text">Buy more — this is a great opportunity to average down</div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-8">
       <div class="q-number">Question 08</div>
-      <div class="q-text">You receive ₹10 lakhs unexpectedly (bonus / inheritance). How would you invest it?</div>
+      <div class="q-text">You receive ₹10 lakhs unexpectedly (bonus/inheritance). How would you invest it?</div>
       <div class="options-grid">
-        <button class="option-btn" onclick="sel(this,'q8',1)"><div class="option-dot"></div><div class="option-text">All in FD or liquid fund — I don't want any risk</div></button>
-        <button class="option-btn" onclick="sel(this,'q8',2)"><div class="option-dot"></div><div class="option-text">Mostly debt with a small equity portion</div></button>
-        <button class="option-btn" onclick="sel(this,'q8',3)"><div class="option-dot"></div><div class="option-text">Split between equity and debt mutual funds</div></button>
-        <button class="option-btn" onclick="sel(this,'q8',4)"><div class="option-dot"></div><div class="option-text">Mostly equity — I want it to grow aggressively</div></button>
+        <button class="option-btn" onclick="sel(this,'q8',1,'All in FD or liquid fund — no risk at all')"><div class="option-dot"></div><div class="option-text">All in FD or liquid fund — I don't want any risk</div></button>
+        <button class="option-btn" onclick="sel(this,'q8',2,'Mostly debt with a small equity portion')"><div class="option-dot"></div><div class="option-text">Mostly debt with a small equity portion</div></button>
+        <button class="option-btn" onclick="sel(this,'q8',3,'Split between equity and debt mutual funds')"><div class="option-dot"></div><div class="option-text">Split between equity and debt mutual funds</div></button>
+        <button class="option-btn" onclick="sel(this,'q8',4,'Mostly equity — I want it to grow aggressively')"><div class="option-dot"></div><div class="option-text">Mostly equity — I want it to grow aggressively</div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-9">
       <div class="q-number">Question 09</div>
       <div class="q-text">Which statement best describes your investing mindset?</div>
       <div class="options-grid">
-        <button class="option-btn" onclick="sel(this,'q9',1)"><div class="option-dot"></div><div class="option-text">Safety first — even 4–5% returns are fine if my capital is safe</div></button>
-        <button class="option-btn" onclick="sel(this,'q9',2)"><div class="option-dot"></div><div class="option-text">I want modest growth with low risk — a small dip is okay</div></button>
-        <button class="option-btn" onclick="sel(this,'q9',3)"><div class="option-dot"></div><div class="option-text">I want good long-term growth — short-term falls don't scare me</div></button>
-        <button class="option-btn" onclick="sel(this,'q9',4)"><div class="option-dot"></div><div class="option-text">I want maximum returns — volatility is the price I'm happy to pay</div></button>
+        <button class="option-btn" onclick="sel(this,'q9',1,'Safety first — even 4-5% returns are fine if capital is safe')"><div class="option-dot"></div><div class="option-text">Safety first — even 4–5% returns are fine if capital is safe</div></button>
+        <button class="option-btn" onclick="sel(this,'q9',2,'I want modest growth with low risk — a small dip is okay')"><div class="option-dot"></div><div class="option-text">I want modest growth with low risk — a small dip is okay</div></button>
+        <button class="option-btn" onclick="sel(this,'q9',3,'I want good long-term growth — short-term falls do not scare me')"><div class="option-dot"></div><div class="option-text">I want good long-term growth — short-term falls don't scare me</div></button>
+        <button class="option-btn" onclick="sel(this,'q9',4,'Maximum returns — volatility is the price I am happy to pay')"><div class="option-dot"></div><div class="option-text">Maximum returns — volatility is the price I'm happy to pay</div></button>
       </div>
     </div>
-
     <div class="question-block" id="qb-10">
       <div class="q-number">Question 10</div>
       <div class="q-text">How do you view investing in the Indian equity market over a 10-year period?</div>
       <div class="options-grid radio-grid">
-        <button class="option-btn" onclick="sel(this,'q10',1)"><div class="option-dot"></div><div class="option-text">Very risky — I don't trust it</div></button>
-        <button class="option-btn" onclick="sel(this,'q10',2)"><div class="option-dot"></div><div class="option-text">Somewhat risky — uncertain</div></button>
-        <button class="option-btn" onclick="sel(this,'q10',3)"><div class="option-dot"></div><div class="option-text">Reasonable — manageable with guidance</div></button>
-        <button class="option-btn" onclick="sel(this,'q10',4)"><div class="option-dot"></div><div class="option-text">Confident — India's growth story is real</div></button>
+        <button class="option-btn" onclick="sel(this,'q10',1,'Very risky — I do not trust it')"><div class="option-dot"></div><div class="option-text">Very risky — I don't trust it</div></button>
+        <button class="option-btn" onclick="sel(this,'q10',2,'Somewhat risky — uncertain')"><div class="option-dot"></div><div class="option-text">Somewhat risky — uncertain</div></button>
+        <button class="option-btn" onclick="sel(this,'q10',3,'Reasonable — manageable with guidance')"><div class="option-dot"></div><div class="option-text">Reasonable — manageable with guidance</div></button>
+        <button class="option-btn" onclick="sel(this,'q10',4,'Confident — India growth story is real')"><div class="option-dot"></div><div class="option-text">Confident — India's growth story is real</div></button>
       </div>
     </div>
-
     <div class="error-msg" id="err-4">Please answer all 4 questions above.</div>
     <div class="nav-buttons">
       <button class="btn-outline" onclick="goTo(3)">← Back</button>
@@ -564,7 +455,7 @@
     </div>
   </div>
 
-  <!-- ═══════════ SCREEN 5: RESULTS ═══════════ -->
+  <!-- SCREEN 5: RESULTS -->
   <div class="screen" id="screen-5">
     <div id="resultContent"></div>
   </div>
@@ -572,139 +463,162 @@
 </div><!-- /container -->
 
 <script>
-  const answers = {};
-  let currentScreen = 0;
+  // ── CONFIG ──────────────────────────────────────────────
+  // STEP: Replace the URL below with YOUR Google Apps Script Web App URL
+  // See the SETUP GUIDE file for instructions
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx08xOs16ltml4M6mt_VfEaUCkI3nyJg-fqGJPw4dnM-HKgyCWnmzIXt58DzXj1DY2MpQ/exec';
+  // ────────────────────────────────────────────────────────
 
-  const STEPS = { 0:'Welcome', 1:'Your Details', 2:'Risk Need', 3:'Risk Ability', 4:'Temperament', 5:'Your Profile' };
+  const answers = {};
+  const answerText = {};
+  let currentScreen = 0;
+  const STEPS = {0:'Welcome',1:'Your Details',2:'Risk Need',3:'Risk Ability',4:'Temperament',5:'Your Profile'};
 
   function goTo(n) {
-    document.getElementById('screen-' + currentScreen).classList.remove('active');
+    document.getElementById('screen-'+currentScreen).classList.remove('active');
     currentScreen = n;
-    document.getElementById('screen-' + n).classList.add('active');
-    const pct = Math.round((n / 5) * 100);
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressPct').textContent = pct + '%';
-    document.getElementById('progressStep').textContent = STEPS[n] || '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('screen-'+n).classList.add('active');
+    const pct = Math.round((n/5)*100);
+    document.getElementById('progressFill').style.width = pct+'%';
+    document.getElementById('progressPct').textContent = pct+'%';
+    document.getElementById('progressStep').textContent = STEPS[n]||'';
+    window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  function sel(btn, key, val) {
-    btn.closest('.options-grid, .radio-grid').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  function sel(btn, key, val, text) {
+    btn.closest('.options-grid, .radio-grid').querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
     btn.classList.add('selected');
     answers[key] = val;
+    answerText[key] = text;
     btn.closest('.question-block').classList.add('answered');
   }
 
   function validateAndGo(from, to) {
-    if (from === 1) {
-      const n = document.getElementById('f_name').value.trim();
-      const a = document.getElementById('f_age').value;
-      const e = document.getElementById('f_employment').value;
-      const i = document.getElementById('f_income').value;
-      const nw = document.getElementById('f_networth').value;
-      if (!n || !a || !e || !i || !nw) { document.getElementById('err-1').classList.add('show'); return; }
+    if (from===1) {
+      const consent = document.getElementById('f_consent').checked;
+      const n=document.getElementById('f_name').value.trim();
+      const a=document.getElementById('f_age').value;
+      const m=document.getElementById('f_mobile').value.trim();
+      const e=document.getElementById('f_employment').value;
+      const i=document.getElementById('f_income').value;
+      const nw=document.getElementById('f_networth').value;
+      if(!n||!a||!m||!e||!i||!nw||!consent){document.getElementById('err-1').classList.add('show');return;}
       document.getElementById('err-1').classList.remove('show');
     }
-    if (from === 2) {
-      if (!answers.q1 || !answers.q2 || !answers.q3) { document.getElementById('err-2').classList.add('show'); return; }
-      document.getElementById('err-2').classList.remove('show');
-    }
-    if (from === 3) {
-      if (!answers.q4 || !answers.q5 || !answers.q6) { document.getElementById('err-3').classList.add('show'); return; }
-      document.getElementById('err-3').classList.remove('show');
-    }
+    if(from===2){if(!answers.q1||!answers.q2||!answers.q3){document.getElementById('err-2').classList.add('show');return;}document.getElementById('err-2').classList.remove('show');}
+    if(from===3){if(!answers.q4||!answers.q5||!answers.q6){document.getElementById('err-3').classList.add('show');return;}document.getElementById('err-3').classList.remove('show');}
     goTo(to);
   }
 
+  const QUESTIONS = [
+    'Primary reason for investing',
+    'Investment time horizon',
+    'Emergency fund availability',
+    'Monthly savings rate',
+    'Investment history / experience',
+    'Financial knowledge level',
+    'Reaction to 20% portfolio drop',
+    'Investment choice for ₹10L windfall',
+    'Overall investing mindset',
+    'View on Indian equity market (10-year)'
+  ];
+
   function calculate() {
-    if (!answers.q7 || !answers.q8 || !answers.q9 || !answers.q10) { document.getElementById('err-4').classList.add('show'); return; }
+    if(!answers.q7||!answers.q8||!answers.q9||!answers.q10){document.getElementById('err-4').classList.add('show');return;}
     document.getElementById('err-4').classList.remove('show');
 
-    // Factor 1: Risk Need
-    const needScore = (answers.q1||2) + (answers.q2||2) + (answers.q3||2);
-    const needLevel = needScore <= 5 ? 'Low' : needScore <= 8 ? 'Moderate' : 'High';
-    const needPct   = needLevel === 'Low' ? 28 : needLevel === 'Moderate' ? 58 : 86;
+    // Factor scores
+    const needScore  = (answers.q1||2)+(answers.q2||2)+(answers.q3||2);
+    const abilScore  = (answers.q4||2)+(answers.q5||2)+(answers.q6||2);
+    const behavScore = (answers.q7||2)+(answers.q8||2)+(answers.q9||2)+(answers.q10||2);
 
-    // Factor 2: Risk-Taking Ability
-    const abilScore = (answers.q4||2) + (answers.q5||2) + (answers.q6||2);
-    const abilLevel = abilScore <= 5 ? 'Low' : abilScore <= 9 ? 'Moderate' : 'High';
-    const abilPct   = abilLevel === 'Low' ? 28 : abilLevel === 'Moderate' ? 58 : 86;
+    const needLevel  = needScore<=5?'Low':needScore<=8?'Moderate':'High';
+    const abilLevel  = abilScore<=5?'Low':abilScore<=9?'Moderate':'High';
+    const behavLevel = behavScore<=7?'Low':behavScore<=12?'Moderate':'High';
 
-    // Factor 3: Behavioural Loss Tolerance
-    const behavScore = (answers.q7||2) + (answers.q8||2) + (answers.q9||2) + (answers.q10||2);
-    const behavLevel = behavScore <= 7 ? 'Low' : behavScore <= 12 ? 'Moderate' : 'High';
-    const behavPct   = behavLevel === 'Low' ? 22 : behavLevel === 'Moderate' ? 55 : 84;
+    const needPct  = needLevel==='Low'?28:needLevel==='Moderate'?58:86;
+    const abilPct  = abilLevel==='Low'?28:abilLevel==='Moderate'?58:86;
+    const behavPct = behavLevel==='Low'?22:behavLevel==='Moderate'?55:84;
 
-    // Final profile score (age-adjusted)
-    const age = parseInt(document.getElementById('f_age').value) || 35;
-    const ageAdj = age > 55 ? -1 : age < 32 ? 1 : 0;
-    const total = needScore + abilScore + behavScore + ageAdj;
+    const age = parseInt(document.getElementById('f_age').value)||35;
+    const ageAdj = age>55?-1:age<32?1:0;
+    const total = needScore+abilScore+behavScore+ageAdj;
 
-    let profile, cls, tagline, eq, debt, cash, funds, horizon, risk;
+    let profile,cls,tagline,eq,debt,cash,funds,horizon,risk;
+    if(total<=12){profile='Very Conservative';cls='vc';eq=5;debt=70;cash=25;tagline='Capital safety is your top priority. You value certainty over growth.';funds='Liquid Funds, Overnight Funds, Ultra Short Duration, FMP';horizon='6 months to 2 years';risk='Inflation risk — returns may not beat inflation over time.';}
+    else if(total<=18){profile='Conservative';cls='con';eq=20;debt=60;cash=20;tagline='You seek steady growth with minimal surprises. Debt-oriented portfolio with small equity cushion.';funds='Short Duration Debt, Corporate Bond Funds, Conservative Hybrid';horizon='2 to 4 years';risk='Interest rate risk in debt funds. Monitor when RBI changes rates.';}
+    else if(total<=24){profile='Moderate';cls='mod';eq=45;debt=42;cash=13;tagline='You balance growth and prudence. You can handle some volatility for meaningful long-term returns.';funds='Aggressive Hybrid, Balanced Advantage, Large Cap, Flexi-cap, Nifty 50 Index';horizon='4 to 7 years';risk='Market correction risk. Discipline during downturns is critical.';}
+    else if(total<=30){profile='Aggressive';cls='agg';eq=70;debt=22;cash=8;tagline='You are growth-oriented and understand that equity volatility is temporary. You are in it for the long game.';funds='Multi-cap, Flexi-cap, Midcap Funds, Sectoral, Index Funds — diversified equity basket';horizon='7 to 12 years';risk='30–40% drawdowns possible in bad years. Stay invested through cycles.';}
+    else{profile='Very Aggressive';cls='vag';eq=85;debt=10;cash=5;tagline='High conviction in equity. You see every correction as an opportunity. Maximum wealth creation focus.';funds='Small Cap, Midcap, Thematic Funds, International Funds';horizon='10+ years';risk='50%+ drawdowns possible. Iron discipline required. Liquidity risk in small caps.';}
 
-    if (total <= 12) {
-      profile='Very Conservative'; cls='vc'; eq=5;  debt=70; cash=25;
-      tagline='Capital safety is your top priority. You value certainty over growth and are willing to accept lower returns to protect what you have built.';
-      funds='Liquid Funds, Overnight Funds, Ultra Short Duration, FMP, Low Duration Debt Funds';
-      horizon='6 months to 2 years. Ideal for emergency reserves and short-term goals.';
-      risk='Inflation risk — your returns may not beat inflation over longer periods.';
-    } else if (total <= 18) {
-      profile='Conservative'; cls='con'; eq=20; debt=60; cash=20;
-      tagline='You seek steady growth with minimal surprises. A debt-oriented portfolio with a small equity cushion suits your temperament.';
-      funds='Short Duration Debt, Corporate Bond Funds, Conservative Hybrid, Balanced Advantage (low equity tilt)';
-      horizon='2 to 4 years. Good for specific goals like home down payment or vehicle purchase.';
-      risk='Interest rate risk in debt funds. Review when RBI changes rates.';
-    } else if (total <= 24) {
-      profile='Moderate'; cls='mod'; eq=45; debt=42; cash=13;
-      tagline='You balance growth and prudence. You can handle some volatility and are focused on medium-to-long-term wealth building.';
-      funds='Aggressive Hybrid, Balanced Advantage Funds, Large Cap Equity, Flexi-cap, Index Funds (Nifty 50)';
-      horizon='4 to 7 years. Well-suited for goals like children\'s education or wealth accumulation.';
-      risk='Market correction risk. Discipline during downturns is critical — this is where I stay with you.';
-    } else if (total <= 30) {
-      profile='Aggressive'; cls='agg'; eq=70; debt=22; cash=8;
-      tagline='You are growth-oriented and understand that equity volatility is temporary. You are in it for the long game.';
-      funds='Multi-cap, Flexi-cap, Midcap Funds, Sectoral/Thematic, Index Funds — diversified equity basket';
-      horizon='7 to 12 years. Ideal for retirement planning and long-term wealth creation.';
-      risk='30–40% drawdowns are possible in bad years. Staying invested through cycles is non-negotiable.';
-    } else {
-      profile='Very Aggressive'; cls='vag'; eq=85; debt=10; cash=5;
-      tagline='You have a strong conviction in equity and a high tolerance for volatility. You see every correction as an opportunity.';
-      funds='Small Cap, Midcap, Thematic Funds, International/Global Funds — high conviction equity';
-      horizon='10+ years. Maximum wealth creation through full market cycles.';
-      risk='50%+ drawdowns are possible. Liquidity can be poor in small caps. Iron discipline required.';
-    }
+    const lm={Low:1,Moderate:2,High:3};
+    const isRed    = lm[needLevel]>lm[abilLevel];
+    const isYellow = !isRed && lm[behavLevel]<lm[needLevel];
 
-    // IRP Logic (Hubble-Grable)
-    const lm = { Low:1, Moderate:2, High:3 };
-    const isRed    = lm[needLevel] > lm[abilLevel];
-    const isYellow = !isRed && lm[behavLevel] < lm[needLevel];
+    const clientName    = document.getElementById('f_name').value;
+    const clientAge     = age;
+    const clientCity    = document.getElementById('f_city').value;
+    const clientMobile  = document.getElementById('f_mobile').value;
+    const clientEmail   = document.getElementById('f_email').value;
+    const clientIncome  = document.getElementById('f_income').value;
+    const clientNW      = document.getElementById('f_networth').value;
+    const clientJob     = document.getElementById('f_employment').value;
+    const clientSource  = document.getElementById('f_source').value;
+    const today         = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+    const refId         = 'SGC-'+Date.now().toString(36).toUpperCase();
 
-    const clientName = document.getElementById('f_name').value;
-    const clientCity = document.getElementById('f_city').value;
-    const clientIncome = document.getElementById('f_income').value;
-    const clientMobile = document.getElementById('f_mobile').value;
-    const today = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+    // Build QA rows for report
+    const qaKeys = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10'];
+    let qaHTML = '';
+    qaKeys.forEach((k,i) => {
+      qaHTML += `<div class="qa-row">
+        <div class="qa-num">Q${i+1}</div>
+        <div class="qa-content">
+          <div class="qa-q">${QUESTIONS[i]}</div>
+          <div class="qa-a">${answerText[k]||'—'}</div>
+        </div>
+      </div>`;
+    });
 
     document.getElementById('resultContent').innerHTML = `
+
       <div class="result-hero">
+        <div class="ref-badge no-print">Ref: ${refId}</div>
         <div class="result-badge ${cls}">${profile} Investor</div>
         <div class="result-profile-name">${profile}</div>
         <div class="result-tagline">${tagline}</div>
       </div>
 
-      <div class="client-info-bar">
-        <div class="cib-item"><div class="cib-label">Investor</div><div class="cib-val">${clientName}</div></div>
-        <div class="cib-item"><div class="cib-label">Age</div><div class="cib-val">${age} yrs</div></div>
-        <div class="cib-item"><div class="cib-label">City</div><div class="cib-val">${clientCity||'—'}</div></div>
-        <div class="cib-item"><div class="cib-label">Income</div><div class="cib-val">${clientIncome||'—'}</div></div>
-        <div class="cib-item"><div class="cib-label">Date</div><div class="cib-val">${today}</div></div>
+      <!-- CLIENT DETAILS -->
+      <div class="report-section">
+        <div class="report-section-title">📋 Client Details</div>
+        <div class="client-info-bar" style="border:none;padding:0;margin:0;">
+          <div class="cib-item"><div class="cib-label">Reference ID</div><div class="cib-val">${refId}</div></div>
+          <div class="cib-item"><div class="cib-label">Name</div><div class="cib-val">${clientName}</div></div>
+          <div class="cib-item"><div class="cib-label">Age</div><div class="cib-val">${clientAge} yrs</div></div>
+          <div class="cib-item"><div class="cib-label">City</div><div class="cib-val">${clientCity||'—'}</div></div>
+          <div class="cib-item"><div class="cib-label">Mobile</div><div class="cib-val">${clientMobile}</div></div>
+          <div class="cib-item"><div class="cib-label">Email</div><div class="cib-val">${clientEmail||'—'}</div></div>
+          <div class="cib-item"><div class="cib-label">Occupation</div><div class="cib-val">${clientJob}</div></div>
+          <div class="cib-item"><div class="cib-label">Annual Income</div><div class="cib-val">${clientIncome}</div></div>
+          <div class="cib-item"><div class="cib-label">Investable Surplus</div><div class="cib-val">${clientNW}</div></div>
+          <div class="cib-item"><div class="cib-label">Source</div><div class="cib-val">${clientSource||'—'}</div></div>
+          <div class="cib-item"><div class="cib-label">Date &amp; Time</div><div class="cib-val">${today}, ${new Date().toLocaleTimeString('en-IN')}</div></div>
+        </div>
       </div>
 
-      ${isRed ? `<div class="alert-red">⚠️ <strong>Advisory Note:</strong> Your stated goals require higher returns than your current financial situation supports. Before investing, we need to discuss revising your goals, increasing your savings rate, or extending your time horizon. Let's connect.</div>` : ''}
-      ${isYellow ? `<div class="alert-yellow">💡 <strong>Advisory Note:</strong> Your financial capacity supports a more growth-oriented portfolio, but your comfort level is lower right now. I will recommend the allocation above, paired with regular reviews and investor education to build your confidence over time.</div>` : ''}
+      <!-- ALL QUESTIONS & ANSWERS -->
+      <div class="report-section">
+        <div class="report-section-title">📝 Questions &amp; Client Responses</div>
+        ${qaHTML}
+      </div>
+
+      <!-- IRP 3-FACTOR -->
+      ${isRed?`<div class="alert-red">⚠️ <strong>Red Flag:</strong> Client's stated goal requires returns that exceed their current risk-taking ability. Goals must be revised before investment.</div>`:''}
+      ${isYellow?`<div class="alert-yellow">💡 <strong>Advisory Note:</strong> Client's financial capacity supports more growth than their comfort level. Regular education and reviews recommended.</div>`:''}
 
       <div class="irp-meter">
-        <div class="irp-title">Your 3-Factor Investment Risk Profile (IRP)</div>
+        <div class="irp-title">3-Factor Investment Risk Profile (IRP) — CFA Institute Methodology</div>
         <div class="irp-row">
           <div class="irp-row-label">Risk Need</div>
           <div class="irp-track"><div class="irp-fill ${needLevel.toLowerCase()}" id="bar-need"></div></div>
@@ -722,6 +636,7 @@
         </div>
       </div>
 
+      <!-- ALLOCATION -->
       <div class="allocation-card">
         <div class="allocation-title">Recommended Asset Allocation for ${clientName}</div>
         <div class="alloc-bars">
@@ -731,51 +646,37 @@
         </div>
       </div>
 
+      <!-- INSIGHTS -->
       <div class="insights-grid">
-        <div class="insight-box">
-          <div class="insight-icon">🎯</div>
-          <div class="insight-title">Suitable Fund Categories</div>
-          <div class="insight-text">${funds}</div>
-        </div>
-        <div class="insight-box">
-          <div class="insight-icon">⏱️</div>
-          <div class="insight-title">Ideal Investment Horizon</div>
-          <div class="insight-text">${horizon}</div>
-        </div>
-        <div class="insight-box">
-          <div class="insight-icon">⚠️</div>
-          <div class="insight-title">Key Risk to Understand</div>
-          <div class="insight-text">${risk}</div>
-        </div>
-        <div class="insight-box">
-          <div class="insight-icon">📞</div>
-          <div class="insight-title">What Happens Next?</div>
-          <div class="insight-text">Sundaresan will review your profile and schedule a personal call to design your fund basket — goal by goal, SIP by SIP. No pressure, no product pushing.</div>
-        </div>
+        <div class="insight-box"><div class="insight-icon">🎯</div><div class="insight-title">Suitable Fund Categories</div><div class="insight-text">${funds}</div></div>
+        <div class="insight-box"><div class="insight-icon">⏱️</div><div class="insight-title">Ideal Investment Horizon</div><div class="insight-text">${horizon}</div></div>
+        <div class="insight-box"><div class="insight-icon">⚠️</div><div class="insight-title">Key Risk to Understand</div><div class="insight-text">${risk}</div></div>
+        <div class="insight-box"><div class="insight-icon">📞</div><div class="insight-title">What Happens Next?</div><div class="insight-text">Sundaresan will review this profile and call to design your fund basket — goal by goal, SIP by SIP. No pressure, no product pushing.</div></div>
       </div>
 
-      <div class="highlight-box">
-        <strong>Sundaresan's Note:</strong> "Returns matter. But protecting capital and managing emotions during corrections matters even more. This profile is the starting point — not the end. I will stay with you through every market cycle."
-      </div>
+      <div class="highlight-box"><strong>Sundaresan's Note:</strong> "Returns matter. But protecting capital and managing emotions during corrections matters even more. This profile is the starting point — not the end. I will stay with you through every market cycle."</div>
 
+      <!-- SUBMISSION STATUS -->
+      <div class="submit-status sending" id="submitStatus">⏳ Saving your profile to our secure records...</div>
+
+      <!-- FOOTER -->
       <div class="result-footer">
-        <div class="rf-left">
+        <div>
           <div class="rf-name">Sundaresan M</div>
           <div class="rf-detail">AMFI Registered Mutual Fund Distributor · ARN: 334843</div>
           <div class="rf-detail">Safe Growth Capital · Coimbatore</div>
         </div>
-        <div class="rf-right">
+        <div style="text-align:right;">
           <div class="rf-phone">+91 90037 90069</div>
           <div class="rf-email">sundaresanmechanical@gmail.com</div>
+          <div class="rf-email" style="margin-top:4px;font-size:10px;opacity:.6;">Ref: ${refId}</div>
         </div>
       </div>
 
-      <div class="disclaimer">
-        <strong>Important Disclaimer:</strong> Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing. Past performance is not indicative of future returns. This risk profile is generated for investor education and advisory suitability purposes only and does not constitute investment advice. Safe Growth Capital is an AMFI Registered Mutual Fund Distributor (ARN: 334843) and not a SEBI Registered Investment Advisor.
-      </div>
+      <div class="disclaimer"><strong>Important Disclaimer:</strong> Mutual fund investments are subject to market risks. Read all scheme related documents carefully before investing. Past performance is not indicative of future returns. This risk profile is generated for investor education and advisory suitability purposes only and does not constitute investment advice. Safe Growth Capital is an AMFI Registered Mutual Fund Distributor (ARN: 334843) and not a SEBI Registered Investment Advisor.</div>
 
-      <div class="result-actions">
-        <button class="btn-primary" onclick="window.print()">🖨️ Save / Print Report</button>
+      <div class="result-actions no-print">
+        <button class="btn-primary" onclick="window.print()">🖨️ Save / Print Full Report</button>
         <a href="tel:+919003790069"><button class="btn-green">📞 Call Sundaresan</button></a>
         <button class="btn-outline" onclick="location.reload()">Start Over</button>
       </div>
@@ -783,14 +684,51 @@
 
     goTo(5);
 
-    setTimeout(() => {
-      document.getElementById('bar-need').style.width  = needPct + '%';
-      document.getElementById('bar-abil').style.width  = abilPct + '%';
-      document.getElementById('bar-behav').style.width = behavPct + '%';
-      document.getElementById('bar-eq').style.width    = eq + '%';
-      document.getElementById('bar-debt').style.width  = debt + '%';
-      document.getElementById('bar-cash').style.width  = cash + '%';
-    }, 350);
+    // Animate bars
+    setTimeout(()=>{
+      document.getElementById('bar-need').style.width  = needPct+'%';
+      document.getElementById('bar-abil').style.width  = abilPct+'%';
+      document.getElementById('bar-behav').style.width = behavPct+'%';
+      document.getElementById('bar-eq').style.width    = eq+'%';
+      document.getElementById('bar-debt').style.width  = debt+'%';
+      document.getElementById('bar-cash').style.width  = cash+'%';
+    },350);
+
+    // Send to Google Sheets
+    const payload = {
+      refId, timestamp: new Date().toISOString(),
+      name: clientName, age: clientAge, city: clientCity,
+      mobile: clientMobile, email: clientEmail,
+      occupation: clientJob, income: clientIncome,
+      networth: clientNW, source: clientSource,
+      q1: answerText.q1, q2: answerText.q2, q3: answerText.q3,
+      q4: answerText.q4, q5: answerText.q5, q6: answerText.q6,
+      q7: answerText.q7, q8: answerText.q8, q9: answerText.q9,
+      q10: answerText.q10,
+      riskNeed: needLevel, riskAbility: abilLevel, temperament: behavLevel,
+      finalProfile: profile,
+      equityPct: eq, debtPct: debt, cashPct: cash,
+      recommendedFunds: funds, horizon, keyRisk: risk,
+      alertType: isRed?'RED FLAG':isYellow?'YELLOW - REVIEW':'GREEN - PROCEED'
+    };
+
+    if(APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbx08xOs16ltml4M6mt_VfEaUCkI3nyJg-fqGJPw4dnM-HKgyCWnmzIXt58DzXj1DY2MpQ/exec') {
+      fetch(APPS_SCRIPT_URL, {
+        method:'POST',
+        mode:'no-cors',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      }).then(()=>{
+        document.getElementById('submitStatus').className='submit-status success';
+        document.getElementById('submitStatus').innerHTML='✅ Profile saved securely. Sundaresan has been notified and will be in touch shortly.';
+      }).catch(()=>{
+        document.getElementById('submitStatus').className='submit-status failed';
+        document.getElementById('submitStatus').innerHTML='⚠️ Could not save automatically. Please screenshot or print this page and WhatsApp to +91 90037 90069.';
+      });
+    } else {
+      document.getElementById('submitStatus').className='submit-status failed';
+      document.getElementById('submitStatus').innerHTML='⚠️ Setup pending. Please print this report and share with Sundaresan via WhatsApp: +91 90037 90069.';
+    }
   }
 </script>
 </body>
