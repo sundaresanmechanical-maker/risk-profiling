@@ -712,7 +712,7 @@
       alertType: isRed?'RED FLAG':isYellow?'YELLOW - REVIEW':'GREEN - PROCEED'
     };
 
-    if(APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbx08xOs16ltml4M6mt_VfEaUCkI3nyJg-fqGJPw4dnM-HKgyCWnmzIXt58DzXj1DY2MpQ/exec') {
+    if(APPS_SCRIPT_URL) {
       fetch(APPS_SCRIPT_URL, {
         method:'POST',
         mode:'no-cors',
